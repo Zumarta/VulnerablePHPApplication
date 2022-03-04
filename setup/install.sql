@@ -1,0 +1,30 @@
+CREATE TABLE users (
+  username VARCHAR(255) NOT NULL,
+  passwd VARCHAR(255) NOT NULL,
+  firstname VARCHAR(255) NOT NULL DEFAULT '',
+  surname VARCHAR(255) NOT NULL DEFAULT '',
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (username)
+);
+
+CREATE TABLE images (
+  id INT AUTO_INCREMENT,
+  title VARCHAR(100) NOT NULL,
+  imgPath VARCHAR(100) NOT NULL DEFAULT './images/demo.svg',
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE comments (
+  id INT AUTO_INCREMENT,
+  comment VARCHAR(255) NOT NULL DEFAULT '',
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  
+  author VARCHAR(255) NOT NULL,
+  imageId INT,
+
+  PRIMARY KEY (id),
+  FOREIGN KEY (author) REFERENCES users(username),
+  FOREIGN KEY (imageId) REFERENCES comments(id)
+);
