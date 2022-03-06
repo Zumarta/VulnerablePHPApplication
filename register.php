@@ -2,7 +2,7 @@
 
 <?php include('header.php') ?>
 
-<!-- Check ob man schon angemeldet ist ;) -->
+<!-- Check, ob man schon angemeldet ist ;) -->
 <?php
 include_once('db.php');
 

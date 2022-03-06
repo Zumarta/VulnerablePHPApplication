@@ -6,25 +6,32 @@
 include_once('db.php');
 $success = 0;
 
+
 if(isset($_GET["id"])) {
   $imageId = $_GET["id"];
   
   $prevId = ($imageId <= 1) ? 1 : $imageId - 1;
   $nextId = $imageId + 1;
 
-  if(isset($_POST["comment"])) {
-    $comment = $_POST["comment"];
-    $sql = "INSERT INTO comments(author, comment, imageId) VALUES ('thaddäus', '$comment', '$imageId');";
-    if($conn->query($sql) === true) {
-      $success = 1;
-    }
-  }
-
   $imagesSql = $conn->query("SELECT * FROM images WHERE id = '$imageId';");
   $result = mysqli_fetch_assoc($imagesSql);
 
   $commentsSql = $conn->query("SELECT * from comments WHERE imageId = '$imageId';");
 }
+
+if(isset($_POST["comment"])) {
+ // if(isset($_SESSION['username']){
+  $usr = $_SESSION['username'];
+  $comment = $_POST["comment"];
+  $sql = "INSERT INTO comments(`comment`, `author`, `imageId`) VALUES ('$comment','$usr', '$imageId');";
+  
+
+    if($conn->query($sql) === true) {
+      $success = 1;
+    }
+  }
+//}
+
 
 ?>
 
@@ -35,13 +42,14 @@ if(isset($_GET["id"])) {
 
   <section class="py-5 container">
     <?php 
-    if($success) {
+    if($success) {  
     ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
       Kommentar gespeichert! <i class="fa fa-smile-o" aria-hidden="true"></i>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <?php 
+      header("Refresh:2");
     }
     ?>
     <div class="row py-lg-5">

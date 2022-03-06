@@ -18,7 +18,10 @@ session_start();
         <?php
           if(isset($_SESSION['username']) && $_SESSION['loggedIn']) {
             echo "Hallo, " . $_SESSION['username'];
-          } else { 
+            ?>
+            </br>
+            <button type="button" onclick="window.location.href = 'logout.php';" class="btn btn-warning">Logout</button>
+            <?php } else { 
           ?>
         <button type="button" onclick="window.location.href = 'login.php';" class="btn btn-warning">Login</button>
         <?php } ?>

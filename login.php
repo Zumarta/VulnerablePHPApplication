@@ -7,22 +7,22 @@ include_once('db.php');
 
 $success = -1;
 
-session_start();
 
 
 if(isset($_POST["username"]) && isset($_POST["password"])) {
   $username = $_POST["username"];
   $password = $_POST["password"];
 
-  $query = "SELECT * FROM users WHERE username = '$username'";
+  $query = "SELECT * FROM users WHERE username = '$username' AND passwd = '$password'";
   $sql = $conn->query($query);
   $user = mysqli_fetch_assoc($sql);
 
   if($user) {
     $success = 1;
+    session_start();
     $_SESSION["username"] = $user["username"];
     $_SESSION["loggedIn"] = true;
-    header('images.php?id=1');
+    header("Location:images.php?id=1");
   } else {
     $success = 0;
   }
