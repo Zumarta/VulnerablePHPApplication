@@ -62,6 +62,8 @@ if(isset($_POST["comment"])) {
         </div>
         <h2 class="text-center fw-light mb-5 pb-3 border-bottom">
           <?php 
+            echo $_GET['id'];
+            echo " - ";
           if(isset($result)) {
             echo $result['title']; 
           } else {

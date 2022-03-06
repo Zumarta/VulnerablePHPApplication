@@ -7,13 +7,12 @@ include_once('db.php');
 
 $success = -1;
 
-
-
 if(isset($_POST["username"]) && isset($_POST["password"])) {
   $username = $_POST["username"];
   $password = $_POST["password"];
 
   $query = "SELECT * FROM users WHERE username = '$username' AND passwd = '$password'";
+  var_dump($query);
   $sql = $conn->query($query);
   $user = mysqli_fetch_assoc($sql);
 
@@ -46,14 +45,14 @@ if($conn) $conn->close();
 
     <div class="form-group">
       <label for="text">Username</label>
-      <input required type="text" class="form-control" id="username" aria-describedby="username"
-        placeholder="xX_HackeR__Xx" name="username">
+      <input type="text" class="form-control" id="username" aria-describedby="username"
+        placeholder="Username" name="username">
       <small id="username" class="form-text text-muted">Deine Daten sind sicher bei uns! :)</small>
     </div>
 
     <div class="form-group">
       <label for="passwordInput">Passwort</label>
-      <input required name="password" type="password" class="form-control" id="passwordInput" placeholder="Passwort">
+      <input name="password" type="password" class="form-control" id="passwordInput" placeholder="Passwort">
     </div>
 
     <button type="submit" class="btn btn-primary">Anmelden</button>
